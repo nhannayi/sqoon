@@ -212,7 +212,13 @@ class BackendHost(lib_csw.Host):
 
         self._profile_timing_evl = EventListener()
         self.call_on_msg('_profile_timing', self._on_profile_timing_msg)
+err_msgs = check_file_format(lines=incorrect_format)
+        expected_err_msg = f'(L007) each segment must start and end with exactly 1 space'
 
+        self.assertIsInstance(err_msgs, list)
+        self.assertEqual(len(err_msgs), 1)
+        err_msg = err_msgs[0]
+        self.assertEqual(err_msg, expected_err_msg)
     def _on_profile_timing_msg(self, timing : float):
         self._profile_timing_evl.call(timing)
 
