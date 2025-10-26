@@ -350,3 +350,13 @@ class Sheet:
             self.open_settings = lib_csw.Signal.Host()
             self.save_settings = lib_csw.Signal.Host()
             self.load_settings = lib_csw.Signal.Host()
+
+# Allow to override setup.
+for f in "${HOME}/.config/termux/termuxrc.sh" "${HOME}/.termux/termuxrc.sh" "${HOME}/.termuxrc"; do
+	if [ -f "$f" ]; then
+		echo "Using builder configuration from '$f'..."
+		. "$f"
+		break
+	fi
+done
+unset f
